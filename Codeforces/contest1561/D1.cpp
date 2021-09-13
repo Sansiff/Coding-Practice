@@ -15,6 +15,7 @@ int32_t main()
     for(int i = 2; i <= n; i ++){
         f[i] = sum;
         for(int j = 2, r; j <= i; j = r + 1){
+            // block  O(sqrt(n))
             r = i / (i / j);
             f[i] = (f[i] + (r - j + 1) * f[i / j]) % m;
         }
