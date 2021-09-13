@@ -1,3 +1,7 @@
+
+//  1561A	Simply StrangeSort
+//  implementation *800
+
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;
@@ -26,6 +30,7 @@ void solve(){
     }    
     cout << res;
 }
+
 
 int32_t main() 
 {
