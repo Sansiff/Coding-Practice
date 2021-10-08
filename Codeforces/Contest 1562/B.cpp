@@ -1,3 +1,7 @@
+
+// 1562B Scenes From a Memory
+// constructive algorithms *1000
+
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;

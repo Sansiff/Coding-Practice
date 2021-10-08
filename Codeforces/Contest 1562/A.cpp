@@ -1,3 +1,7 @@
+
+//  1562A The Miracle and the Sleeper
+//  greedy *800
+
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;

@@ -1,5 +1,5 @@
 
-//  Rings
+//  1562C Rings
 //  constructive algorithms *1500
 
 #include <bits/stdc++.h>

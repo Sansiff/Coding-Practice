@@ -1,5 +1,5 @@
 
-// 1561D1 Up the Strip (simplified version)
+// 1561D1 Up the Strip
 // data structures, dp  *1900
 
 #include <bits/stdc++.h>
@@ -9,6 +9,8 @@ using namespace std;
 
 int32_t main()
 {   
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     int n, m; cin >> n >> m;
     vector<int> f(n + 2), d(n + 2);
     f[1] = 1; int sum = 0;
@@ -22,7 +24,7 @@ int32_t main()
             d[min((i + 1) * j, n + 1)] = (d[min((i + 1) * j, n + 1)] - f[i] + m) % m;
         }
     }
-    cout << f[n];
+    cout << f[n] << endl;
 
     return 0;
 }

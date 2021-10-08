@@ -28,8 +28,8 @@ void solve(){
         else cout << 2;
         cout << endl;
     }
-
 }
+
 int32_t main() 
 {
 	ios::sync_with_stdio(false);
