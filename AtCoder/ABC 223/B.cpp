@@ -2,12 +2,15 @@
 
 using namespace std;
 
-int main()
+int main() 
 {
-    string s; cin >> s;
-    sort(s.begin(), s.end());
-    cout << s << endl;
-    reverse(s.begin(), s.end());
-    cout << s;
-    return 0;
+    string s;
+    cin >> s;
+    int n = s.length();
+    vector<string> v(n);
+    for (int i = 0; i < n; i ++) {
+        v[i] = s.substr(i, n - i) + s.substr(0, i);
+    }
+    cout << *min_element(begin(v), end(v)) << '\n';
+    cout << *max_element(begin(v), end(v)) << '\n';
 }
