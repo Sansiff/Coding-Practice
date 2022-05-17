@@ -1,0 +1,1 @@
+{"name":"A. ABC","group":"Codeforces Round #769 (Div. 2)","url":"https://codeforces.com/contest/1632/problem/A","interactive":false,"memoryLimit":256,"timeLimit":1000,"tests":[{"input":"4\n1\n1\n2\n10\n2\n01\n4\n1010\n","output":"YES\nYES\nYES\nNO\n","id":1643618211861}],"input":{"type":"stdin"},"output":{"type":"stdout"},"srcPath":"d:\\Github\\Coding-Practice\\1632A.cpp"}

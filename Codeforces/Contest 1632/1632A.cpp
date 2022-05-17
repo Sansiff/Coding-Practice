@@ -16,7 +16,14 @@ void read(VI& a){
 }
 
 void solve(){
-
+    int n; cin >> n;
+    string s; cin >> s;
+    if(n == 1) cout << "YES";
+    else if(n == 2){
+        if(s[0] == s[1]) cout << "NO";
+        else cout << "YES";
+    }
+    else cout << "NO";
 }
 
 signed main(){

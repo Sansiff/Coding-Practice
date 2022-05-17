@@ -16,7 +16,15 @@ void read(VI& a){
 }
 
 void solve(){
-
+    int n, x, y; cin >> n >> x >> y;
+    VI a(n); read(a);
+    int cnt = 0;
+    for(int& x : a){
+        if(x & 1) cnt ++;
+    }
+    cnt += x + y;
+    if(cnt & 1) cout << "Bob";
+    else cout << "Alice";
 }
 
 signed main(){

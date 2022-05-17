@@ -15,17 +15,13 @@ void read(VI& a){
     for(int& x : a) cin >> x;
 }
 
-void solve(){
-
-}
-
 signed main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int _; cin >> _;
-    while(_--){
-        solve();
-        cout << '\n';
-    }
+    string s; cin >> s;
+    int res = stoi(s);
+    res += stoi(s.substr(1,2) + s[0]);
+    res += stoi(s[2] + s.substr(0, 2));
+    cout << res;
     return 0;
 }

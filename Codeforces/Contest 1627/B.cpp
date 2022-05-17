@@ -15,8 +15,19 @@ void read(VI& a){
     for(int& x : a) cin >> x;
 }
 
-void solve(){
 
+void solve() {
+    int n, m; cin >> n >> m;
+    vector<int> ans;
+    for(int i = 1; i <= n; i ++ ) {
+        for(int j = 1; j <= m; j ++ ) {
+            int cnt = 0;
+            cnt = max(max(max(i - 1 + j - 1, n - i + j - 1), m - j + i - 1), n - i + m - j);
+            ans.push_back(cnt);
+        }
+    }
+    sort(all(ans));
+    for(int &x: ans) cout << x << ' ';
 }
 
 signed main(){
@@ -25,7 +36,7 @@ signed main(){
     int _; cin >> _;
     while(_--){
         solve();
-        cout << '\n';
+        cout << endl;
     }
     return 0;
 }

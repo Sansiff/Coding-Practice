@@ -14,9 +14,19 @@ typedef vector<PII> VPII;
 void read(VI& a){
     for(int& x : a) cin >> x;
 }
-
-void solve(){
-
+void solve() {
+    int n; cin >> n;
+    VI a(n); read(a);
+    int ans = a.back();
+    int idx = 0, cnt = 0;
+    reverse(all(a));
+    rep(i, 0, n) {
+        while(idx < n - 1 && a[idx + 1] == ans) idx ++;
+        if(idx == n - 1) break;
+        cnt ++, idx = 2 * idx + 1;
+        if(idx >= n - 1) break;
+    }
+    cout << cnt;
 }
 
 signed main(){

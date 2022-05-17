@@ -1,4 +1,5 @@
 %==============================常用宏包、环境==============================%
+% !TeX program = xelatex
 \documentclass[twocolumn,a4]{article}
 \usepackage{xeCJK} % For Chinese characters
 \usepackage{amsmath, amsthm}
@@ -29,7 +30,7 @@
 % 代码格式设置
 \lstset{
     language    = c++,
-    numbers     = left,
+    %numbers     = left,
     numberstyle = \tiny,
     breaklines  = true,
     captionpos  = b,
@@ -76,6 +77,29 @@ for(int i = 2, j = 0; i <= n; i ++){
 }
 \end{lstlisting}
 
+\subsection{Manacher}
+\begin{lstlisting}
+int manacher(string str){
+	int len = str.length();
+	vector<char> s(2 * len + 100);
+	vector<int> d(2 * len + 100);
+	int n = 2 * len + 1, res = 1;
+	for(int i = 0; i < len; i ++) 
+        s[2 * i + 1] = str[i];
+	for(int i = 0, l = 0, r = -1; i < n; i ++) {
+		int j = l + r - i;
+		d[i] = max(min(d[j], j - l + 1), 0);
+		if (j - d[j] < l) {
+			while (i - d[i] >= 0 && i + d[i] < n && s[i - d[i]] == s[i + d[i]])
+				d[i]++;
+			l = i - d[i] + 1, r = i + d[i] - 1;
+		}
+		res = max(res, d[i]);
+	}
+	return res - 1;
+}
+\end{lstlisting}
+
 \subsection{Trie}
 \begin{lstlisting}
 int son[N * 26][26], cnt[N * 26], idx;
@@ -99,7 +123,7 @@ int query(string s){
 }
 \end{lstlisting}
 
-\subsection{AC自动机}
+\subsection{AC-Automation}
 \begin{lstlisting}
 struct AC_Automaton{
     int tr[N][26], cnt[N],fail[N], idx;
@@ -208,9 +232,58 @@ int exgcd(int a, int b, int& x, int& y){
 若 $gcd(a, p) = 1$，且 $p$ 为质数，则有 $inv(a) \equiv a^{p - 2}(\bmod \ p)$
 
 % TODO Structure
-\section{Structure}
-\subsection{线段树}
 
+\section{Structure}
+
+\subsection{DSU}
+\begin{lstlisting}
+struct UF {
+    vector<int> fa, sz;
+    int n, cnt;
+    UF(int x): n(x), cnt(x), fa(x), sz(x, 1) {
+        iota(fa.begin(), fa.end(), 0);
+    }
+    int find(int x) {
+        return fa[x] == x ? x : (fa[x] = find(fa[x]));
+    }
+    bool merge(int x, int y) {
+        x = find(x), y = find(y);
+        if (x == y) return false;
+        if (sz[x] < sz[y]) swap(x, y);
+        fa[y] = x; sz[x] += sz[y];
+        --cnt;
+        return true;
+    }
+    bool same(int x, int y) {return find(x) == find(y);}
+};
+\end{lstlisting}
+
+
+\subsection{Fenwick}
+\begin{lstlisting}
+struct Fenwick {
+    const int n;
+    vector<int> a;
+    Fenwick(int n) : n(n), a(n) {}
+    void add(int x, int v) {
+        for (int i = x + 1; i <= n; i += i & -i) {
+            a[i - 1] += v;
+        }
+    }
+    int sum(int x) {
+        T ans = 0;
+        for (int i = x; i > 0; i -= i & -i) {
+            ans += a[i - 1];
+        }
+        return ans;
+    }
+    int rangeSum(int l, int r) {
+        return sum(r) - sum(l);
+    }
+};
+\end{lstlisting}
+
+\subsection{SegmentTree}
 \begin{lstlisting}
 struct SegmentTree {
 	//modify1 : mul
@@ -400,7 +473,7 @@ int query_tree(int u){
 % TODO Graph
 \section{Graph}
 
-\subsection{dijkstra}
+\subsection{Dijkstra}
 \begin{lstlisting}
 int dijkstra(){
     memset(dist, 0x3f, sizeof dist);
@@ -424,7 +497,7 @@ int dijkstra(){
 }
 
 \end{lstlisting}
-\subsection{spfa}
+\subsection{Spfa}
 \begin{lstlisting}
 bool spfa(){
     queue<int> q;
@@ -448,7 +521,7 @@ bool spfa(){
     return false;
 }
 \end{lstlisting}
-\subsection{prim}
+\subsection{Prim}
 
 \begin{lstlisting}
 int prim(){
@@ -470,7 +543,7 @@ int prim(){
 }
 \end{lstlisting}
 
-\subsection{kruskal}
+\subsection{Kruskal}
 \begin{lstlisting}
 int kruskal(){
     sort(arr, arr + m, cmp);
@@ -485,10 +558,69 @@ int kruskal(){
 }
 \end{lstlisting}
 
+\subsection{LCA}
+\begin{lstlisting}
+void bfs(int root){
+    memset(dep, 0x3f, sizeof dep);
+    queue<int> q;
+    dep[0] = 0, dep[root] = 1;
+    q.push(root);
+    while(q.size()){
+        int t = q.front(); q.pop();
+        for(int i = h[t]; ~i; i = ne[i]){
+            int j = e[i];
+            if(dep[j] > dep[t] + 1){
+                dep[j] = dep[t] + 1; 
+                fa[j][0] = t;
+                q.push(j);
+                for(int k = 1; k <= 15; k ++)
+                    fa[j][k] = fa[fa[j][k - 1]][k - 1]; 
+            }
+        }
+    }
+}
+int lca(int a, int b){
+    if(dep[a] < dep[b]) swap(a, b);
+    for(int k = 15; k >= 0; k --){
+        if(dep[fa[a][k]] >= dep[b])
+            a = fa[a][k];
+    }
+    if(a == b) return a;
+    for(int k = 15; k >= 0; k --){
+        if(fa[a][k] != fa[b][k])
+            a = fa[a][k], b = fa[b][k];
+    }
+    return fa[a][0];
+}
+\end{lstlisting}
+
+% TODO DP
+\section{DP}
+\subsection{LIS}
+\begin{lstlisting}
+int LIS(vector<int>& a){
+    vector<int> stk; int n = a.size();
+    stk.push_back(a[0]);
+    for(int i = 1; i < n; i ++){
+        if(a[i] > s1.back()) stk.push_back(a[i]);
+        else *lower_bound(all(stk), a[i]) = a[i];
+    }
+    return stk.size();
+}
+\end{lstlisting}
 
 
 % TODO Other
 \section{Other}
+\subsection{离散化}
+\begin{lstlisting}
+sort(all(v))
+v.erase(unique(all(v)), v.end());
+int find(VI& v, int& x){
+    return lower_bound(all(v), x) - v.begin();
+}
+\end{lstlisting}
+
 \subsection{VIM}
 \begin{lstlisting}
     syntax on

@@ -16,7 +16,9 @@ void read(VI& a){
 }
 
 void solve(){
-
+    int n; cin >> n;
+    VI a(n); read(a);
+    
 }
 
 signed main(){

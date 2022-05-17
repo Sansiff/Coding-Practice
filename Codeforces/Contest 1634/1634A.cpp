@@ -16,7 +16,15 @@ void read(VI& a){
 }
 
 void solve(){
-
+    int n, k; cin >> n >> k;
+    string s; cin >> s;
+    string t = s;
+    reverse(all(s));
+    if(t == s) cout << 1;
+    else{
+        if(k == 0) cout << 1;
+        else cout << 2;
+    }
 }
 
 signed main(){

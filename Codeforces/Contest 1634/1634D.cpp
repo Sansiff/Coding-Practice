@@ -25,7 +25,7 @@ signed main(){
     int _; cin >> _;
     while(_--){
         solve();
-        cout << '\n';
+        cout << endl;
     }
     return 0;
 }

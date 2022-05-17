@@ -15,13 +15,23 @@ void read(VI& a){
     for(int& x : a) cin >> x;
 }
 
-void solve(){
 
+void solve(){
+    int a, b; cin >> a >> b;
+    int res = b - a;
+    for(int i = a; i <= b; i ++){
+        res = min(res, i - a + (i | b) - b + 1);
+    }
+    for(int i = b; i <= 2 * b - a; i ++){
+        if((i | a) == i) res = min(res, i - b + 1);
+    }
+    cout << res;
 }
 
 signed main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+
     int _; cin >> _;
     while(_--){
         solve();

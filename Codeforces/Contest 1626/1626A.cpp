@@ -15,8 +15,20 @@ void read(VI& a){
     for(int& x : a) cin >> x;
 }
 
-void solve(){
-
+void solve() {
+    string s; cin >> s;
+    vector<int> cnt(26, 0);
+    for(char c: s) cnt[c - 'a'] ++;
+    string res;
+    for(int i = 0; i < 26; i ++ )  {
+        if(cnt[i] == 2) res += ('a' + i);
+    }
+    cout << res << res;
+    for(int i = 0; i < 26; i ++ ) {
+        if(cnt[i] == 1) {
+            cout << char('a' + i);
+        }
+    }
 }
 
 signed main(){

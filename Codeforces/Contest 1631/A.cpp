@@ -3,6 +3,7 @@
 #define lowbit(x) (x&-x)
 #define rep(i, l, r) for(int i = l; i < r; i ++)
 #define all(x) (x).begin(),(x).end()
+#define maxx(a) *max_element(all(a))
 #define fi first
 #define se second
 using namespace std;
@@ -16,7 +17,13 @@ void read(VI& a){
 }
 
 void solve(){
-
+    int n; cin >> n;
+    VI a(n), b(n); read(a), read(b);
+    rep(i, 0, n){
+        if(a[i] > b[i]) swap(a[i], b[i]);
+    }
+    cout << maxx(a) * maxx(b);
+    
 }
 
 signed main(){

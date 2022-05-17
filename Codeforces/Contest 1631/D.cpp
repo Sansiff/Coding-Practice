@@ -16,7 +16,10 @@ void read(VI& a){
 }
 
 void solve(){
-
+    int n; cin >> n;
+    vector<int> arr(n);
+    for(int& x : arr) cin >> x;
+    
 }
 
 signed main(){
@@ -25,7 +28,7 @@ signed main(){
     int _; cin >> _;
     while(_--){
         solve();
-        cout << '\n';
+        cout << endl;
     }
     return 0;
 }

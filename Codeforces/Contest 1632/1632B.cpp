@@ -16,7 +16,11 @@ void read(VI& a){
 }
 
 void solve(){
-
+    int n; cin >> n;
+    int k = 1;
+    while(k * 2 < n) k *= 2;
+    for(int i = k - 1; i >= 0; i --) cout << i << ' ';
+    for(int i = k; i < n; i ++) cout << i << ' ';
 }
 
 signed main(){

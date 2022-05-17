@@ -15,8 +15,18 @@ void read(VI& a){
     for(int& x : a) cin >> x;
 }
 
-void solve(){
 
+void solve() {
+	int l, r, k; cin >> l >> r >> k;
+	if(l == r){
+		if(r < 2) cout << "NO";
+		else cout << "YES";	
+		return;
+	}
+	int c1 = (r - l + 1) >> 1, c2 = c1;
+	if(l & 1 && r & 1) c1 ++;
+	if(k >= c1) cout << "YES";
+	else cout << "NO";
 }
 
 signed main(){

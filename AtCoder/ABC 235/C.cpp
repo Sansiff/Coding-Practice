@@ -15,16 +15,26 @@ void read(VI& a){
     for(int& x : a) cin >> x;
 }
 
-void solve(){
-
-}
-
 signed main(){
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    int _; cin >> _;
-    while(_--){
-        solve();
+    int n, q; cin >> n >> q;
+    VI arr(n); map<int, int> mp;
+    VII po(n + 10);
+    int cnt = 0, idx = 1;
+    for(int& x : arr){
+        cin >> x;
+        if(!mp[x]) mp[x] = ++ cnt;
+        po[mp[x]].push_back(idx ++);
+    }
+    
+    while(q --){
+        int a, k; cin >> a >> k;
+        if(!mp[a]) cout << -1;
+        else{
+            if(k > po[mp[a]].size()) cout << -1;
+            else cout << po[mp[a]][k - 1];
+        }
         cout << '\n';
     }
     return 0;
